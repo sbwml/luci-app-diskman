@@ -23,6 +23,9 @@
 
 直接把源码拉到 OpenWrt 源码的 package 目录下，然后 `make menuconfig` 选中编译即可。
 
+## 截图
+![UI Preview](docs/diskman.png)
+
 ## 谢致
 
 - https://github.com/lisaac/luci-app-diskman
