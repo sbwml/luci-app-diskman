@@ -1,0 +1,41 @@
+name: Build Packages
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: Build ${{ matrix.arch }}-${{ matrix.tag }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch:
+          - x86_64
+        tag:
+          - openwrt-24.10
+          - openwrt-25.12
+
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Build Packages
+        uses: openwrt/gh-action-sdk@main
+        env:
+          PACKAGES: luci-app-diskman
+          FEEDNAME: packages_ci
+          ARCH: ${{ matrix.arch }}-${{ matrix.tag }}
+
+      - name: Upload packages
+        uses: ncipollo/release-action@main
+        with:
+          name: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          replacesArtifacts: true
+          prerelease: false
+          artifacts: "bin/packages/${{ matrix.arch }}/packages_ci/*diskman*"
