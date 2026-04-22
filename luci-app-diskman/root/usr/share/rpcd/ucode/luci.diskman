@@ -166,7 +166,7 @@ const methods = {
 				let parts_arr = split(block_path, "/");
 				let dev_name = parts_arr[length(parts_arr) - 1];
 
-				if (match(dev_name, /^(loop|ram|mtdblock|zram)/) || match(dev_name, /boot[0-9]+$/)) {
+				if (match(dev_name, /^(loop|ram|mtdblock|zram|sr)/) || match(dev_name, /boot[0-9]+$/)) {
 					continue;
 				}
 
