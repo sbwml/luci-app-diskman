@@ -1,31 +1,40 @@
 # luci-app-diskman
 
-一个简单的磁盘管理 LuCI 插件，支持在网页上进行分区、格式化、挂载等基本操作，支持 BTRFS RAID 以及查看硬盘状态、SMART 信息。
+A lightweight disk management plugin for LuCI that enables basic operations such as partitioning, formatting, and mounting directly via the web interface. It also supports BTRFS RAID management and provides real-time disk health and SMART information.
 
-## 运行环境
+## Prerequisites
 
-由于插件底层的接口脚本依赖 ucode，因此需要 OpenWrt 24.10 或以上版本。
+The underlying scripts for this plugin rely on **ucode**, which requires **OpenWrt 24.10** or a newer version.
 
-## 支持的文件系统
+## Supported File Systems
 
-- ext4（及 ext2/3）
+- ext4 (including ext2/3)
 - btrfs
 - xfs
 - f2fs
 - ntfs
-- vfat（fat16/fat32）
+- vfat (fat16/fat32)
 - exfat
-- swap (交换分区)
+- swap (swap partition)
 
-注意：格式化 ntfs 文件系统需要安装 ntfs-3g-utils 工具包。
+**Note:** Formatting partitions as NTFS requires the `ntfs-3g-utils` package.
 
-## 编译
+## Compilation
 
-直接把源码拉到 OpenWrt 源码的 package 目录下，然后 `make menuconfig` 选中编译即可。
+To include this plugin in your OpenWrt build, clone the source code into your OpenWrt source `package` directory,then select it via `make menuconfig`:
 
-## 截图
+```bash
+git clone https://github.com/sbwml/luci-app-diskman package/new/luci-app-diskman
+
+make menuconfig # Navigate to LuCI -> 3. Applications -> luci-app-diskman
+
+make package/new/luci-app-diskman/compile V=s
+```
+
+## Screenshots
+
 ![UI Preview](docs/diskman.png)
 
-## 谢致
+## Credits
 
 - https://github.com/lisaac/luci-app-diskman
